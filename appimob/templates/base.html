@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Project{% endblock %}</title>
+    <style>
+        body {
+            background-color: #343a40;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #333;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        h2 {
+            color: #17a2b8;
+        }
+
+        a.button, button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        a.button:hover, button:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    {% block header %}
+        <header>
+            <h1>My Project</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'base' %}" class="button">Pagina Inicial</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a class="button" href="{% url 'home' %}">Home</a></li>
+                        {% block authenticated_user_options %}
+                            <li><a class="button" href="{% url 'logout' %}">Logout</a></li>
+                        {% endblock %}
+                    {% else %}
+                        <li><a class="button" href="{% url 'register' %}">Register</a></li>
+                        <li><a class="button" href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                    {% block listar_imoveis_button %}
+                        {% if not is_listar_imoveis_page %}
+                            <li><a class="button" href="{% url 'listar_imoveis' %}">Listar Imóveis</a></li>
+                        {% endif %}
+                    {% endblock %}
+                </ul>
+            </nav>
+        </header>
+    {% endblock %}
+
+    {% block content %}
+        <main>
+            {% block page_content %}{% endblock %}
+        </main>
+    {% endblock %}
+
+    {% block footer %}
+        <footer>
+            <p>&copy; 2023 My Project. All rights reserved.</p>
+        </footer>
+    {% endblock %}
+</body>
+</html>

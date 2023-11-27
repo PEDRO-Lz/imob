@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Imóveis{% endblock %}
+
+{% block listar_imoveis_button %}
+    {% with is_listar_imoveis_page=True %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block page_content %}
+    <h2>Lista de Imóveis</h2>
+
+    {% if imoveis %}
+        <ul>
+            {% for imovel in imoveis %}
+                <li>{{ imovel.tipo }} - R$ {{ imovel.preco }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum imóvel encontrado.</p>
+    {% endif %}
+{% endblock %}

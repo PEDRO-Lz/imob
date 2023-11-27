@@ -1,0 +1,6 @@
+<form method="post" action="{% url 'cadastrar_proprietario' %}">
+    {% csrf_token %}
+    <label for="cpf">CPF:</label>
+    <input type="text" name="cpf" id="cpf" required>
+    <input type="submit" value="Cadastrar Proprietário">
+</form>

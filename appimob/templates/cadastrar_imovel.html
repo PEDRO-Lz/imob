@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <h2>Cadastrar Imóvel</h2>
+    <form method="post" action="{% url 'cadastrar_imovel' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Cadastrar Imóvel">
+    </form>
+</body>
+</html>

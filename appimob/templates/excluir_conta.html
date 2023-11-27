@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <h2>Tem certeza de que deseja excluir sua conta?</h2>
+    <form method="post" action="{% url 'excluir_conta' %}">
+        {% csrf_token %}
+        <input type="submit" value="Confirmar Exclusão">
+    </form>
+</body>
+</html>

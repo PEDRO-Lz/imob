@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo ao Sistema</title>
+    <style>
+        body {
+            background-color: #343a40;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        h2 {
+            color: #17a2b8;
+        }
+
+        a.button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        a.button:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <nav>
+            <ul>
+                <li><a href="{% url 'base' %}" class="button">Pagina Inicial</a></li>
+                <li><a class="button" href="{% url 'listar_imoveis' %}">Listar Imóveis</a></li>
+                <li><a href="{% url 'listar_imoveis_usuario' %}" class="button">Meus Imóveis</a></li>
+                <li><a href="{% url 'logout' %}" class="button">Logout</a></li>
+                <li><a href="{% url 'excluir_conta' %}" class="button">Excluir Conta</a></li>
+
+            </ul>
+        </nav>
+        <h2>Bem-vindo, {{ user.username }}!</h2>
+
+        {% if user.proprietario %}
+            <nav>
+                <ul>
+                    <li><a href="{% url 'cadastrar_imovel' %}" class="button">Cadastrar Imóvel</a></li>
+                </ul>
+            </nav>
+        {% else %}
+            <nav>
+                <ul>
+                    <li><a href="{% url 'cadastrar_proprietario' %}" class="button">Cadastrar Proprietário</a></li>
+                </ul>
+            </nav>
+        {% endif %}
+    {% endif %}

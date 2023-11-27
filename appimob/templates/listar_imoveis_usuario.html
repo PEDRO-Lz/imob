@@ -1,0 +1,6 @@
+{% if user.is_authenticated %}
+    {% for imovel in imoveis %}
+        <li>{{ imovel.tipo }} - R$ {{ imovel.preco }}</li>
+    {% endfor %}
+{% else %}
+{% endif %}
